@@ -1,0 +1,27 @@
+{
+    "categories" : [ {
+                    "title" : "Main Dish"
+                    "description" : "some description"
+                    },
+                    
+                    {
+                    "title" : "Drinks"
+                    "description" : "description"
+                    },
+                    ]
+    
+    "menuItems" : [
+                   {
+                   "title" : "Stake"
+                   "imageURL" : "http://www.churchill1795.com/sites/default/files/imagecache/product_page_main_image/products/second/APR%20AP101_2.png"
+                   "description" : "menuItem description"
+                   },
+                   
+                   {
+                   "title" : "Chicken Soup"
+                   "imageURL" : "http://www.churchill1795.com/sites/default/files/imagecache/product_page_main_image/products/second/APR%20AP101_2.png"
+                   "description" : "menuItem description"
+                   }
+                   ]
+    
+}
