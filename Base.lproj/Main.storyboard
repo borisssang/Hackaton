@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="85" id="GZY-3o-Xuy" customClass="CategoryViewCell" customModule="Hackaton" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="85" id="GZY-3o-Xuy" customClass="CategoryViewCell" customModule="Hackaton" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GZY-3o-Xuy" id="Hi9-iS-QeG">
@@ -27,7 +27,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJN-yz-axC">
-                                            <rect key="frame" x="8" y="8" width="89" height="41"/>
+                                            <rect key="frame" x="8" y="8" width="42" height="41"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="41" id="e74-je-vuh"/>
                                             </constraints>
@@ -35,11 +35,10 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALr-V6-gCH">
-                                            <rect key="frame" x="165" y="0.0" width="202" height="84"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALr-V6-gCH">
+                                            <rect key="frame" x="165" y="0.0" width="202" height="20.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="202" id="T4Y-Nr-IoI"/>
-                                                <constraint firstAttribute="height" constant="84" id="z5U-KJ-Iq1"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -51,7 +50,6 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="OJN-yz-axC" secondAttribute="bottom" id="CCN-mQ-DJz"/>
                                         <constraint firstItem="ALr-V6-gCH" firstAttribute="trailing" secondItem="Hi9-iS-QeG" secondAttribute="trailingMargin" id="IAm-4y-XDO"/>
                                         <constraint firstItem="OJN-yz-axC" firstAttribute="leading" secondItem="Hi9-iS-QeG" secondAttribute="leadingMargin" id="LuD-LR-hhf"/>
-                                        <constraint firstItem="ALr-V6-gCH" firstAttribute="leading" secondItem="OJN-yz-axC" secondAttribute="trailing" constant="68" id="NiI-y8-11i"/>
                                         <constraint firstAttribute="bottom" secondItem="ALr-V6-gCH" secondAttribute="bottom" id="dYr-W8-QQs"/>
                                         <constraint firstItem="OJN-yz-axC" firstAttribute="top" secondItem="Hi9-iS-QeG" secondAttribute="topMargin" id="xV1-KW-q3e"/>
                                     </constraints>

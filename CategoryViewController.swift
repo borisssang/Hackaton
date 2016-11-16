@@ -40,7 +40,7 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Category Cell", for: indexPath) as!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as!
         CategoryViewCell
         
         let category = self.categories[indexPath.row]
