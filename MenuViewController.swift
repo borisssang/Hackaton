@@ -15,8 +15,8 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let urlString = "http://pastebin.com/raw/GbG79Pxz/" + (category)
+
+        let urlString = "http://pastebin.com/raw/LjUjfGUi"
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -25,7 +25,7 @@ class MenuViewController: UITableViewController {
             } else {
                 do {
                     let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-                    if let menuDictionaries = parsedData["menuItems"] as? [[String:AnyObject]]{
+                    if let menuDictionaries = parsedData[self.category] as? [[String:AnyObject]]{
                         for menuDictionary in menuDictionaries {
                             let menuItem = MenuItem(menuDictionary: menuDictionary)
                             self.menuItems.append(menuItem)
