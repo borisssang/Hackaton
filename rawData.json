@@ -2,12 +2,49 @@
     "categories" : [
             {
                     "title" : "Main Dish",
-                    "description" : "some description"
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
             },
                     
-                    {
+            {
                     "title" : "Drinks",
-                    "description" : "description"
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
+
+            },
+            
+            {
+                    "title" : "Soups",
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
+            },
+                    
+            {
+                    "title" : "Deserts",
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
+            }
+            ],
+    
+    "menuItems" : [
+                    {
+                    "title" : "Stake",
+                    "description" : "delicious stake",
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
+                    },
+                    
+                    {
+                    "title" : "beer",
+                    "description" : "alcohol 7%",
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
+                    },
+                    
+                    {
+                    "title" : "Chicken Soup",
+                    "description" : "hot chicken soup served with bread",
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
+                    },
+                    
+                    {
+                    "title" : "Pancake",
+                    "description" : "served with nutella or honey",
+                    "image" : "http://pngimg.com/upload/plate_PNG5324.png"
                     }
-            ]
+                    ]
 }

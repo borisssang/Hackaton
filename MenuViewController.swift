@@ -1,5 +1,5 @@
 //
-//  CategoryViewController.swift
+//  MenuViewController.swift
 //  Hackaton
 //
 //  Created by Boris Angelov on 11/16/16.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class CategoryViewController: UITableViewController {
+class MenuViewController: UITableViewController {
 
-    var categories = [Category]()
+    var menuItems = [MenuItem]()
+    var category: String = "default"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //getting the data from the server
-        let urlString = "http://pastebin.com/raw/GbG79Pxz"
+        let urlString = "http://pastebin.com/raw/GbG79Pxz/" + (category)
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -25,18 +25,18 @@ class CategoryViewController: UITableViewController {
             } else {
                 do {
                     let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-                    if let ctgDictionaries = parsedData["categories"] as? [[String:AnyObject]]{
-                        for ctgDictionary in ctgDictionaries {
-                            let newCategory = Category(ctgDictionary: ctgDictionary)
-                            self.categories.append(newCategory)
+                    if let menuDictionaries = parsedData["menuItems"] as? [[String:AnyObject]]{
+                        for menuDictionary in menuDictionaries {
+                            let menuItem = MenuItem(menuDictionary: menuDictionary)
+                            self.menuItems.append(menuItem)
                         }
                     } } catch let error as NSError {
                         print(error)
                 }
             }
             }.resume()
-        
         self.tableView.reloadData()
+        
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
@@ -45,39 +45,27 @@ class CategoryViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return menuItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as!
-        CategoryViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as!
+        MenuViewCell
         
-        let category = self.categories[indexPath.row]
+        let menuItem = self.menuItems[indexPath.row]
         
-        cell.category = category
+        cell.menuItem = menuItem
         
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:
-        IndexPath)
-    {
-        let selectedCategory = String(describing: self.categories[indexPath.row])
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                    if let detailVC = segue.destination as? MenuViewController{
-                    detailVC.category = selectedCategory
-            }
-        }
-    }
 }
-

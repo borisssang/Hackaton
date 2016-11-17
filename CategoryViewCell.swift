@@ -9,33 +9,24 @@
 import UIKit
 
 class CategoryViewCell: UITableViewCell {
-
+    
     var category: Category! {
         didSet {
             self.updateUI()
         }
     }
-    
     func updateUI(){
+        if category != nil{
         titleLabel.text = category.title
-        descriptionLabel.text = category.categoryDescription
+        let categoryImageURL = category.categoryImage
+        let networkService = NetworkService(url: categoryImageURL as NSURL)
+        networkService.downloadImage { (imageData) in
+            let image = UIImage(data: imageData as Data)
+            DispatchQueue.main.async(execute: {
+                self.categoryImage.image = image
+            })
+        }}
     }
-    
-    
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
-    
-// authorImageView.image = UIImage(named: "duc")
-//        createdAtLabel.text = "Duc Tran | \(episode.createdAt!)"
-//        
-//        let thumbnailURL = episode.thumbnailURL
-//        let networkService = NetworkService(url: thumbnailURL!)
-//        networkService.downloadImage { (imageData) in
-//            let image = UIImage(data: imageData as Data)
-//            DispatchQueue.main.async(execute: {
-//                self.thumbnailImageView.image = image
-//            })
-//        }
-
 }
