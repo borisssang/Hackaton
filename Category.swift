@@ -21,6 +21,6 @@ class Category: NSObject {
     
     init(ctgDictionary: [String : AnyObject]){
         self.title = (ctgDictionary["title"] as? String)!
-       self.categoryImage = URL(string: ctgDictionary["image"] as! String)!
+        self.categoryImage = URL(string: ctgDictionary["image"] as! String)!
     }
 }

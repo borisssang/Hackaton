@@ -15,27 +15,9 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let urlString = "http://pastebin.com/raw/LjUjfGUi"
-        let url = URL(string: urlString)
-        let request = URLRequest(url: url!)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print("error")
-            } else {
-                do {
-                    let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-                    if let menuDictionaries = parsedData[self.category] as? [[String:AnyObject]]{
-                        for menuDictionary in menuDictionaries {
-                            let menuItem = MenuItem(menuDictionary: menuDictionary)
-                            self.menuItems.append(menuItem)
-                        }
-                    } } catch let error as NSError {
-                        print(error)
-                }
-            }
-            }.resume()
-        self.tableView.reloadData()
+        
+        //след наклонената черта ще е името на категорията и просто свалям всички меню айтъми от нея
+        get_data_from_url("http://pastebin.com/raw/EwnLhzLx/" + category)
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -68,4 +50,67 @@ class MenuViewController: UITableViewController {
         
         return cell
     }
+    
+    func get_data_from_url(_ link:String)
+    {
+        let url:URL = URL(string: link)!
+        let session = URLSession.shared
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+        
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (
+            data, response, error) in
+            
+            guard let _:Data = data, let _:URLResponse = response  , error == nil else {
+                
+                return
+            }
+            
+            self.extract_json(data!)
+            
+        })
+        task.resume()
+    }
+
+    func extract_json(_ data: Data)
+    {
+        let json: Any?
+        
+        do
+        {
+            json = try JSONSerialization.jsonObject(with: data, options: [])
+        }
+        catch
+        {
+            return
+        }
+        
+        guard let data_list = json as? NSArray else
+        {
+            return
+        }
+        
+        if let menuItems_list = json as? NSArray
+        {
+            for i in 0 ..< data_list.count
+            {
+                if let menuDictionary = menuItems_list[i] as? [String:AnyObject]
+                {
+                    let newMenuItem = MenuItem(menuDictionary: menuDictionary)
+                    menuItems.append(newMenuItem)
+                }
+            }
+        }
+        DispatchQueue.main.async(execute: {self.do_table_refresh()})
+    }
+    
+    func do_table_refresh()
+    {
+        self.tableView.reloadData()
+    }
 }
+

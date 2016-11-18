@@ -10,33 +10,12 @@ import UIKit
 
 class CategoryViewController: UITableViewController {
 
-    var categories = [Array<Category>]()
+    var categories = Array<Category>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //getting the data from the server pls don't judge :D 
-        let urlString = "http://pastebin.com/raw/LjUjfGUi"
-        let url = URL(string: urlString)
-        let request = URLRequest(url: url!)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print("error")
-            } else {
-                do {
-                    let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
-                    if let ctgDictionaries = parsedData["categories"] as? [[String:AnyObject]]{
-                        for ctgDictionary in ctgDictionaries {
-                            let newCategory = Category(ctgDictionary: ctgDictionary)
-                            self.categories.append([newCategory])
-                        }
-                    } } catch let error as NSError {
-                        print(error)
-                }
-            }
-            }.resume()
-        
-        self.tableView.reloadData()
+        get_data_from_url("http://pastebin.com/raw/GMgxHj55")
+
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
@@ -62,7 +41,7 @@ class CategoryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as!
         CategoryViewCell
         
-        let category = categories[indexPath.section][indexPath.row]
+        let category = categories[indexPath.row]
         
         cell.category = category
         
@@ -79,19 +58,66 @@ class CategoryViewController: UITableViewController {
             }
         }
     }
+    
+    func get_data_from_url(_ link:String)
+    {
+        let url:URL = URL(string: link)!
+        let session = URLSession.shared
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+        
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (
+            data, response, error) in
+            
+            guard let _:Data = data, let _:URLResponse = response  , error == nil else {
+                
+                return
+            }
+        
+            self.extract_json(data!)
+            
+        })
+        task.resume()
+    }
+    
+    func extract_json(_ data: Data)
+    {
+        let json: Any?
+        
+        do
+        {
+            json = try JSONSerialization.jsonObject(with: data, options: [])
+        }
+        catch
+        {
+            return
+        }
+        
+        guard let data_list = json as? NSArray else
+        {
+            return
+        }
+        
+        if let categories_list = json as? NSArray
+        {
+            for i in 0 ..< data_list.count
+            {
+                if let categoryDictionary = categories_list[i] as? [String:AnyObject]
+                {
+                    let newCategory = Category(ctgDictionary: categoryDictionary)
+                    categories.append(newCategory)
+                }
+            }
+        }
+        DispatchQueue.main.async(execute: {self.do_table_refresh()})
+    }
+    
+    func do_table_refresh()
+    {
+        self.tableView.reloadData()
+    }
 }
-
-//По-добрият начин, по който се опитвах да го направя но не успях:
-//override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//    let selectedCategory = [indexPath.row]
-//    self.performSegueWithIdentifier("toNextViewController", sender: data)
-//}
-//And then, we gonna perform our segue:
-//
-//override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//    if (segue.identifier == "toNextViewController") {
-//        let viewController:NEXTViewController = segue.destinationViewController as! NEXTViewController
-//        viewController.param = sender as! YOURDataObject
-//    }
-//}
-

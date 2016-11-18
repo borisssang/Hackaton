@@ -23,8 +23,8 @@ class MenuViewCell: UITableViewCell {
         let menuItemImageURL = menuItem.menuItemImage
         let networkService = NetworkService(url: menuItemImageURL as NSURL)
         networkService.downloadImage { (imageData) in
-            let image = UIImage(data: imageData as Data)
-            DispatchQueue.main.async(execute: { self.ItemImage.image = image })
+        let image = UIImage(data: imageData as Data)
+        DispatchQueue.main.async(execute: { self.ItemImage.image = image })
         }
     }
 }
