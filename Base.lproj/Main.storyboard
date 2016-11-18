@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ntk-bE-51c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Eb-MX-r0y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -124,6 +124,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nuM-Ox-6OH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-47.200000000000003" y="705.69715142428788"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="oKi-zA-kWa">
+            <objects>
+                <viewController id="1Eb-MX-r0y" customClass="ScannerViewController" customModule="Hackaton" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="86P-hq-QFN"/>
+                        <viewControllerLayoutGuide type="bottom" id="ETi-gz-vaO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2yI-Nm-PnM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bm-hS-f3b">
+                                <rect key="frame" x="0.0" y="571" width="375" height="96"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Scan Qr Code"/>
+                                <connections>
+                                    <segue destination="Ntk-bE-51c" kind="show" id="SuJ-bj-0TU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2bm-hS-f3b" firstAttribute="leading" secondItem="2yI-Nm-PnM" secondAttribute="leading" id="J9M-4T-g5n"/>
+                            <constraint firstItem="2bm-hS-f3b" firstAttribute="top" secondItem="86P-hq-QFN" secondAttribute="bottom" constant="551" id="MDD-eg-L9P"/>
+                            <constraint firstItem="2bm-hS-f3b" firstAttribute="bottom" secondItem="ETi-gz-vaO" secondAttribute="top" id="YtU-Dz-GQd"/>
+                            <constraint firstAttribute="trailing" secondItem="2bm-hS-f3b" secondAttribute="trailing" id="zr4-G1-2AT"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EGv-rc-9xh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1882.4000000000001" y="-54.422788605697157"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YbG-TS-t0b">
